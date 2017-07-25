@@ -17,7 +17,7 @@ import {LeagueBowlingComponent} from "../modules/bowling/league-bowling.componen
 import {JoinALeagueComponent, BowlingDialogComponent} from "../modules/bowling/join-a-league.component";
 import {MoonlightBowlingComponent} from "../modules/bowling/moonlight-bowling.component";
 import {ContactUsComponent, EmailDialogComponent} from "../modules/contact-us/contact-us.component";
-import {WeddingsComponent} from "../modules/events/weddings.component";
+import {WeddingsComponent, WeddingDialogComponent} from "../modules/events/weddings.component";
 import {CorporateEventsComponent} from "../modules/events/corporate-events.component";
 import {BirthdayPartiesComponent} from "../modules/events/birthday-parties.component";
 import {ItalianPieShoppeComponent} from "../modules/food-and-drinks/italian-pie-shoppe.component";
@@ -32,7 +32,7 @@ import {TextMaskModule} from "angular2-text-mask";
 import {BowlingLeaguesService} from "../services/bowling/bowling-leagues.service";
 import {OpenBowlingService} from "../services/bowling/open-bowling.service";
 import {VolleyballLeaguesService} from "../services/volleyball/volleyball-leagues.service";
-import {AdminComponent} from "../modules/admin/admin.component";
+import {AdminComponent, BowlingLeagueDialogComponent} from "../modules/admin/admin.component";
 import {VolleyballAdminComponent, ResetDialogConfirmComponent} from "../modules/admin/volleyball-admin.component";
 import {UniqueDatePipe} from "../modules/common/pipes/unique-date.component";
 import {NewGameComponent} from "../modules/admin/new-game.component";
@@ -79,7 +79,9 @@ import {WeddingMenuComponent} from '../modules/admin/wedding-menu-admin.componen
     NewsAdminComponent,
     ResetDialogConfirmComponent,
     PlayoffsComponent,
-    WeddingMenuComponent
+    WeddingMenuComponent,
+    BowlingLeagueDialogComponent,
+    WeddingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +112,9 @@ import {WeddingMenuComponent} from '../modules/admin/wedding-menu-admin.componen
     EmailDialogComponent,
     BowlingDialogComponent,
     LoginDialogComponent,
-    ResetDialogConfirmComponent
+    ResetDialogConfirmComponent,
+    BowlingLeagueDialogComponent,
+    WeddingDialogComponent
   ],
   providers: [
     BowlingLeaguesService,
