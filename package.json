@@ -9,19 +9,23 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/app.js\" "
+    "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/app.js\" ",
+    "startHeroku": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --port 4200 & npm run _server:runHeroku",
+    "_server:runHeroku": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"node dist/server/app.js\" ",
+    "postinstall": "ng build --aot -prod",
+    "deploy": "git push origin master && git push heroku master"
   },
   "private": true,
   "dependencies": {
-    "@angular/cli": "1.1.1",
-    "@angular/compiler-cli": "^4.2.0",
-    "@angular/language-service": "^4.2.0",
     "@angular/animations": "^4.2.0",
+    "@angular/cli": "1.1.1",
     "@angular/common": "^4.2.0",
     "@angular/compiler": "^4.2.0",
+    "@angular/compiler-cli": "^4.2.0",
     "@angular/core": "^4.2.0",
     "@angular/forms": "^4.2.0",
     "@angular/http": "^4.2.0",
+    "@angular/language-service": "^4.2.0",
     "@angular/material": "^2.0.0-beta.6",
     "@angular/platform-browser": "^4.2.0",
     "@angular/platform-browser-dynamic": "^4.2.0",
@@ -30,9 +34,9 @@
     "@types/compression": "0.0.33",
     "@types/express": "^4.0.36",
     "@types/lodash": "^4.14.66",
+    "@types/node": "^6.0.85",
     "@types/pg": "^6.1.42",
     "@types/serve-favicon": "^2.2.28",
-    "@types/node": "~6.0.60",
     "agentkeepalive": "^3.3.0",
     "angular2-text-mask": "^8.0.2",
     "body-parser": "^1.17.2",
@@ -50,9 +54,9 @@
     "pg": "^7.0.1",
     "rxjs": "^5.1.0",
     "serve-favicon": "^2.4.3",
-    "zone.js": "^0.8.4",
-    "typescript": "~2.3.3",
-    "ts-node": "~3.0.4"
+    "ts-node": "~3.0.4",
+    "typescript": "^2.3.4",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.45",
@@ -67,5 +71,9 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "tslint": "~5.3.2"
+  },
+  "engines" : {
+    "node": "8.1.0",
+    "npm": "5.0.4"
   }
 }
