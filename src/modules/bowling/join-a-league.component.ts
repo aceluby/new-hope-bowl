@@ -21,6 +21,9 @@ export class JoinALeagueComponent {
   managerEmail : string;
   managerPhone : string;
 
+  individualFirstName : string;
+  individualLastName : string
+
   loadingBowlingLeagueData : boolean = false;
 
   telephoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];

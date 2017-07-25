@@ -1,8 +1,10 @@
-<md-menu #yearMenu="mdMenu" *ngFor="let league of leagues | uniqueyear">
-  <button md-menu-item (click)="selectYear(league.year)"> {{league.year}} </button>
-</md-menu>
+
 
 <div>
+  <md-menu #yearMenu="mdMenu" *ngFor="let league of leagues | uniqueyear">
+    <button md-menu-item (click)="selectYear(league.year)"> {{league.year}} </button>
+  </md-menu>
+
   <md-toolbar>
     <div *ngFor="let league of leagues | uniqueday">
       <button md-button md-ripple (click)="selectDay(league.day)" type="button" >
