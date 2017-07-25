@@ -9,7 +9,6 @@ import * as favicon from 'serve-favicon';
 const app: express.Application = express();
 const ROOT = path.join(path.resolve(__dirname, '..'));
 const CLIENT = path.join(path.resolve(__dirname, '../../client'));
-const FAVICON = path.join(path.resolve(__dirname, '../../client/favicon.ico'));
 
 app.set('x-powered-by', false);
 
@@ -29,18 +28,18 @@ app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
-if (app.get('env') === 'production') {
+const forceSSL = function() {
+  return function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(
+        ['https://', req.get('Host'), req.url].join('')
+      );
+    }
+    next();
+  }
+};
 
-  // in production mode run application from dist folder
-  app.use(express.static(CLIENT));
-  app.use(favicon(FAVICON));
-
-  // Define lazy loaded routes
-  app.use('/transfer-orders', express.static(CLIENT));
-  app.use('/transfer-orders/*', express.static(CLIENT));
-  app.use('/purchase-orders', express.static(CLIENT));
-  app.use('/purchase-orders/*', express.static(CLIENT));
-}
+app.use(forceSSL());
 
 // register the routes for the api
 routesFnc(app);
