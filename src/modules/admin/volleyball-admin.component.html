@@ -1,0 +1,109 @@
+<md-toolbar>
+  <div *ngFor="let menu of functions">
+    <button md-button md-ripple (click)="selectMenu(menu)" type="button" >
+      {{menu}}
+    </button>
+  </div>
+  <md-toolbar-row *ngIf="selectedMenu=='Enter Scores'">
+    <div *ngFor="let league of volleyballLeagues | uniqueday">
+      <button md-button md-ripple (click)="selectDay(league.day)" type="button" >
+        {{league.day}}
+      </button>
+    </div>
+  </md-toolbar-row>
+  <md-toolbar-row *ngIf="selectedDay!='' && selectedMenu=='Enter Scores'">
+    <div *ngFor="let league of leaguesOnSelectedDay">
+      <button md-button md-ripple (click)="selectLeague(league)" type="button" >
+        {{league.name}}
+      </button>
+    </div>
+  </md-toolbar-row>
+  <md-toolbar-row *ngIf="selectedLeague!=null && selectedMenu=='Enter Scores'">
+    <div *ngFor="let game of leagueSchedule | uniquedate">
+      <button md-button md-ripple (click)="selectDate(game.date)" type="button" >
+        {{game.date}}
+      </button>
+    </div>
+  </md-toolbar-row>
+  <md-toolbar-row *ngIf="selectedMenu=='League Maintenance'">
+    <div *ngFor="let maintenance of leagueMaintenance">
+      <button md-button md-ripple (click)="selectMaintenance(maintenance)" type="button" >
+        {{maintenance}}
+      </button>
+    </div>
+    <span style="flex: 1 1 auto;"></span>
+    <button md-button md-ripple (click)="selectMaintenance('Reset Schedules')" type="button" >
+      Reset Schedules
+    </button>
+  </md-toolbar-row>
+  <md-toolbar-row *ngIf="selectedMaintenance=='Edit Schedule' || selectedMaintenance=='Edit League'">
+    <div *ngFor="let league of volleyballLeagues | uniqueday">
+      <button md-button md-ripple (click)="selectDay(league.day)" type="button" >
+        {{league.day}}
+      </button>
+    </div>
+  </md-toolbar-row>
+  <md-toolbar-row *ngIf="selectedDay!='' && (selectedMaintenance=='Edit Schedule'  || selectedMaintenance=='Edit League')">
+    <div *ngFor="let league of leaguesOnSelectedDay">
+      <button md-button md-ripple (click)="selectLeague(league)" type="button" >
+        {{league.name}}
+      </button>
+    </div>
+  </md-toolbar-row>
+  <md-toolbar-row *ngIf="selectedLeague!=null && selectedMenu=='Enter Scores'">
+    <button md-button md-ripple (click)="startPlayoffs()" type="button" >
+      Start Playoffs
+    </button>
+  </md-toolbar-row>
+</md-toolbar>
+<div *ngIf="gamesOnDate != null">
+  <div *ngFor="let game of gamesOnDate">
+    <table>
+      <tr>
+        <th></th>
+        <th>{{game.teamOne.name}}</th>
+        <th>{{game.teamTwo.name}}</th>
+      </tr>
+      <tr>
+        <td><b>G1</b></td>
+        <td><md-input-container>
+          <input mdInput placeholder="T1" [(ngModel)]="game.teamOneScoreGameOne" email required>
+        </md-input-container></td>
+        <td><md-input-container>
+          <input mdInput placeholder="T2" [(ngModel)]="game.teamTwoScoreGameOne" email required>
+        </md-input-container></td>
+      </tr>
+      <tr>
+        <td><b>G2</b></td>
+        <td><md-input-container>
+          <input mdInput placeholder="T1" [(ngModel)]="game.teamOneScoreGameTwo" email required>
+        </md-input-container></td>
+        <td><md-input-container>
+          <input mdInput placeholder="T2" [(ngModel)]="game.teamTwoScoreGameTwo" email required>
+        </md-input-container></td>
+      </tr>
+      <tr>
+        <td><b>G3</b></td>
+        <td><md-input-container>
+          <input mdInput placeholder="T1" [(ngModel)]="game.teamOneScoreGameThree" email required>
+        </md-input-container></td>
+        <td><md-input-container>
+          <input mdInput placeholder="T2" [(ngModel)]="game.teamTwoScoreGameThree" email required>
+        </md-input-container></td>
+      </tr>
+    </table>
+  </div>
+  <button md-raised-button md-ripple (click)="saveScores()">Save</button>
+</div>
+
+<div *ngIf="selectedMaintenance=='Edit Schedule' && selectedLeague != null">
+  <new-game-component [leagueSchedule]="leagueSchedule" [leagueTeams]="leagueTeams" [schedules]="schedules"></new-game-component>
+</div>
+<div *ngIf="selectedMaintenance=='Edit League' && selectedLeague != null">
+  <new-team-component [allTeams]="volleyballTeams" [leagueTeams]="leagueTeams" [league]="selectedLeague"></new-team-component>
+</div>
+<div *ngIf="selectedMaintenance=='Add/Remove a League'">
+  <league-maintenance-component [leagues]="volleyballLeagues"></league-maintenance-component>
+</div>
+
+

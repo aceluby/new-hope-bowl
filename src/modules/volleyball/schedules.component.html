@@ -1,0 +1,126 @@
+<md-menu #yearMenu="mdMenu" *ngFor="let league of leagues | uniqueyear">
+  <button md-menu-item (click)="selectYear(league.year)"> {{league.year}} </button>
+</md-menu>
+
+<div>
+  <md-toolbar>
+    <div *ngFor="let league of leagues | uniqueday">
+      <button md-button md-ripple (click)="selectDay(league.day)" type="button" >
+        {{league.day}}
+      </button>
+    </div>
+    <span style="flex: 1 1 auto;"></span>
+    <button md-button md-ripple [mdMenuTriggerFor]="yearMenu" type="button">
+      {{selectedYear}}
+    </button>
+    <md-toolbar-row *ngIf="selectedDay!=''">
+      <div *ngFor="let league of leaguesOnSelectedDay">
+        <button md-button md-ripple (click)="selectLeague(league)" type="button" >
+          {{league.name}}
+        </button>
+      </div>
+    </md-toolbar-row>
+  </md-toolbar>
+  <md-card>
+    <img md-card-image src="../../assets/volleyball_sunset.jpeg">
+  </md-card>
+
+  <md-grid-list cols="5" rowHeight=".8:1">
+    <md-grid-tile colspan="2">
+      <div *ngIf="selectedLeague!=null && blueDivisionInSelectedLeague != null && blueDivisionInSelectedLeague.length != 0">
+        <h2>{{selectedLeague.name}}, Blue Division</h2>
+        <table style="width:100%">
+          <tr>
+            <th>Name</th>
+            <th>W</th>
+            <th>L</th>
+            <th>Div</th>
+            <th>PF</th>
+            <th>PA</th>
+            <th>Diff</th>
+          </tr>
+          <tr *ngFor="let team of blueDivisionInSelectedLeague">
+            <td><md-chip-list><md-chip (click)="selectTeam(team)">{{team.name}}</md-chip></md-chip-list></td>
+            <td align="center">{{team.wins}}</td>
+            <td align="center">{{team.losses}}</td>
+            <td align="center">{{team.divisionWins}}</td>
+            <td align="center">{{team.pointsFor}}</td>
+            <td align="center">{{team.pointsAgainst}}</td>
+            <td align="center">{{team.diff}}</td>
+          </tr>
+        </table>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile  colspan="3" rowspan="2">
+      <div *ngIf="selectedTeam != null">
+        <h2>{{selectedTeam.name}}</h2>
+        <table style="width:100%">
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Court</th>
+            <th>Opponent</th>
+            <th>H/A</th>
+            <th>Result</th>
+            <th>Game 1</th>
+            <th>Game 2</th>
+            <th>Game 3</th>
+          </tr>
+          <tr *ngFor="let schedule of teamSchedule">
+            <td align="center">{{schedule.date}}</td>
+            <td align="center">{{schedule.time}}</td>
+            <td align="center">{{schedule.court}}</td>
+            <td *ngIf="schedule.teamOne.name == selectedTeam.name" align="center">{{schedule.teamTwo.name}}</td>
+            <td *ngIf="schedule.teamTwo.name == selectedTeam.name" align="center">{{schedule.teamOne.name}}</td>
+            <td *ngIf="schedule.teamOne.name == selectedTeam.name && schedule.teamOneHome" align="center">H</td>
+            <td *ngIf="schedule.teamOne.name == selectedTeam.name && !schedule.teamOneHome" align="center">A</td>
+            <td *ngIf="schedule.teamOne.name != selectedTeam.name && schedule.teamOneHome" align="center">A</td>
+            <td *ngIf="schedule.teamOne.name != selectedTeam.name && !schedule.teamOneHome" align="center">H</td>
+            <td *ngIf="schedule.teamOneScoreGameOne != null && schedule.teamOne.name == selectedTeam.name" align="center">{{calculateResult(schedule, schedule.teamOne)}}</td>
+            <td *ngIf="schedule.teamOneScoreGameOne != null && schedule.teamTwo.name == selectedTeam.name" align="center">{{calculateResult(schedule, schedule.teamTwo)}}</td>
+            <td *ngIf="schedule.teamOneScoreGameOne != null" align="center">{{schedule.teamOneScoreGameOne}}-{{schedule.teamTwoScoreGameOne}}</td>
+            <td *ngIf="schedule.teamOneScoreGameOne != null" align="center">{{schedule.teamOneScoreGameTwo}}-{{schedule.teamTwoScoreGameTwo}}</td>
+            <td *ngIf="schedule.teamOneScoreGameOne != null" align="center">{{schedule.teamOneScoreGameThree}}-{{schedule.teamTwoScoreGameThree}}</td>
+          </tr>
+        </table>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <div *ngIf="selectedLeague!=null && redDivisionInSelectedLeague != null && redDivisionInSelectedLeague.length != 0">
+        <h2>{{selectedLeague.name}}, Red Division</h2>
+        <table style="width:100%">
+          <tr>
+            <th>Name</th>
+            <th>W</th>
+            <th>L</th>
+            <th>Div</th>
+            <th>PF</th>
+            <th>PA</th>
+            <th>Diff</th>
+          </tr>
+          <tr *ngFor="let team of redDivisionInSelectedLeague">
+            <td><md-chip-list><md-chip (click)="selectTeam(team)">{{team.name}}</md-chip></md-chip-list></td>
+            <td align="center">{{team.wins}}</td>
+            <td align="center">{{team.losses}}</td>
+            <td align="center">{{team.divisionWins}}</td>
+            <td align="center">{{team.pointsFor}}</td>
+            <td align="center">{{team.pointsAgainst}}</td>
+            <td align="center">{{team.diff}}</td>
+          </tr>
+        </table>
+      </div>
+    </md-grid-tile>
+
+  </md-grid-list>
+
+  <div *ngIf="selectedLeague!=null && leagueSchedule != null && leagueTeams != null && leagueSchedule.length > 0 && leagueTeams.length > 0">
+    <h1>Playoffs</h1>
+    <playoffs-component [leagueSchedule]="leagueSchedule" [leagueTeams]="leagueTeams"></playoffs-component>
+  </div>
+
+
+
+
+
+
+</div>

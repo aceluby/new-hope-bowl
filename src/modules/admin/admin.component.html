@@ -1,0 +1,52 @@
+<div>
+  <md-toolbar>
+    <div *ngFor="let page of adminPages">
+      <button md-button md-ripple (click)="selectAdminPage(page)" type="button" >
+        {{page}}
+      </button>
+    </div>
+  </md-toolbar>
+  <div *ngIf="selectedPage=='Bowling Leagues'">
+    <div *ngFor="let bowlingLeague of bowlingLeagues">
+      <md-input-container>
+        <input mdInput placeholder="Name" [(ngModel)]="bowlingLeague.name" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Day" [(ngModel)]="bowlingLeague.day" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Time" [(ngModel)]="bowlingLeague.time" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Url" [(ngModel)]="bowlingLeague.url" required>
+      </md-input-container>
+    </div>
+    <button md-raised-button md-ripple (click)="saveBowlingLeagues()">Save</button>
+  </div>
+  <div *ngIf="selectedPage=='Open Bowling'">
+    <div *ngFor="let bowl of openBowlingTimes">
+      <md-input-container>
+        <input mdInput placeholder="Day" [(ngModel)]="bowl.day" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Start Time" [(ngModel)]="bowl.startTime" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="End Time" [(ngModel)]="bowl.endTime" required>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Price" [(ngModel)]="bowl.price" required>
+      </md-input-container>
+    </div>
+    <button md-raised-button md-ripple (click)="saveOpenBowling()">Save</button>
+  </div>
+  <div *ngIf="selectedPage=='Volleyball'">
+    <volleyball-admin-component></volleyball-admin-component>
+  </div>
+  <div *ngIf="selectedPage=='News'">
+    <news-admin-component [news]="news"></news-admin-component>
+  </div>
+  <div *ngIf="selectedPage=='Wedding Menu'">
+    <wedding-menu-admin-component></wedding-menu-admin-component>
+  </div>
+</div>

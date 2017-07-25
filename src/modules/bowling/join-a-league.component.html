@@ -1,0 +1,85 @@
+<div>
+  <md-card>
+    <img md-card-image src="../../assets/bowling_shoes.jpg" style="height: 400px">
+  </md-card>
+  <md-tab-group>
+    <md-tab label="Team Signup">
+      <h2>Team Information</h2>
+      <md-input-container style="width: 50%">
+        <input mdInput placeholder="Team Name" [(ngModel)]="teamName" required>
+      </md-input-container>
+      <br>
+      <md-select placeholder="League Day" [(ngModel)]="selectedDay" required>
+        <md-option *ngFor="let league of leagues | uniqueday" [value]="league.day" (click)="resetSelectedLeague()" >{{league.day}}</md-option>
+      </md-select>
+      <md-select *ngIf="selectedDay!=''" placeholder="League" [(ngModel)]="selectedLeague" required>
+        <md-option *ngFor="let leagueNames of populateLeagues(selectedDay)" [value]="leagueNames">{{leagueNames}}</md-option>
+      </md-select>
+      <md-input-container *ngIf="selectedLeague != ''">
+        <input mdInput placeholder="Time" disabled [value]="populateTime(selectedDay, selectedLeague)" >
+      </md-input-container>
+      <h2>Manager Contact Information</h2>
+      <md-divider></md-divider>
+      <table cellspacing="0"><tr>
+        <td><md-input-container style="width: 100%">
+          <input mdInput placeholder="Manager First Name" [(ngModel)]="managerFirstName" required>
+        </md-input-container></td>
+        <td><md-input-container style="width: 100%">
+          <input mdInput placeholder="Manager Last Name" [(ngModel)]="managerLastName" required>
+        </md-input-container></td>
+      </tr></table>
+
+      <p>
+        <md-input-container style="width: 50%">
+          <input type="email" mdInput placeholder="Email Address" [(ngModel)]="managerEmail" email required>
+          <md-error>Invalid email address</md-error>
+        </md-input-container>
+        <md-input-container style="width: 50%">
+          <input [textMask]="{mask: telephoneMask}" type="tel" mdInput placeholder="Phone" [(ngModel)]="managerPhone" required>
+        </md-input-container>
+      </p>
+
+      <h2>Team Members</h2>
+      <md-divider></md-divider>
+      <new-player-component></new-player-component>
+      <br><br>
+      <button md-raised-button md-ripple (click)="submitTeam()">Submit</button>
+    </md-tab>
+    <md-tab label="Individual Signup">
+      <h2>Contact Information</h2>
+      <md-divider></md-divider>
+      <table cellspacing="0"><tr>
+        <td><md-input-container style="width: 100%">
+          <input mdInput placeholder="First Name" [(ngModel)]="individualFirstName" required>
+        </md-input-container></td>
+        <td><md-input-container style="width: 100%">
+          <input mdInput placeholder="Last Name" [(ngModel)]="individualLastName" required>
+        </md-input-container></td>
+      </tr></table>
+
+      <p>
+        <md-input-container style="width: 50%">
+          <input type="email" mdInput placeholder="Email Address" [(ngModel)]="managerEmail" email required>
+          <md-error>Invalid email address</md-error>
+        </md-input-container>
+        <md-input-container style="width: 50%">
+          <input [textMask]="{mask: telephoneMask}" type="tel" mdInput placeholder="Phone" [(ngModel)]="managerPhone" required>
+        </md-input-container>
+      </p>
+
+      <md-select placeholder="League Day" [(ngModel)]="selectedDay" required>
+        <md-option *ngFor="let league of leagues | uniqueday" [value]="league.day" (click)="resetSelectedLeague()">{{league.day}}</md-option>
+      </md-select>
+      <md-select *ngIf="selectedDay!=''" placeholder="League" [(ngModel)]="selectedLeague" required>
+        <md-option *ngFor="let leagueNames of populateLeagues(selectedDay)" [value]="leagueNames">{{leagueNames}}</md-option>
+      </md-select>
+      <md-input-container *ngIf="selectedLeague != ''">
+        <input mdInput placeholder="Time" disabled [value]="populateTime(selectedDay, selectedLeague)">
+      </md-input-container>
+
+      <br><br>
+      <button md-raised-button md-ripple (click)="submitIndividual()">Submit</button>
+
+    </md-tab>
+  </md-tab-group>
+</div>

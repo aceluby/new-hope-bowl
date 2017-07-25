@@ -1,0 +1,22 @@
+<div>
+  <md-toolbar>
+    7107 42nd Avenue N | New Hope, MN 55427 | (763) 537-9376
+  </md-toolbar>
+  <md-card>
+    <img md-card-image src="../../assets/nhb_lanes.jpeg">
+  </md-card>
+  <h2>Contact Us</h2>
+  <md-input-container style="width: 50%">
+    <input type="email" mdInput placeholder="Email Address" [(ngModel)]="email" email required>
+    <md-error>Invalid email address</md-error>
+  </md-input-container>
+  <md-input-container style="width: 50%">
+    <input mdInput placeholder="Subject" [(ngModel)]="subject" required>
+  </md-input-container>
+  <md-input-container style="width: 50%">
+    <textarea rows="6" mdInput placeholder="Message" [(ngModel)]="message" required></textarea>
+  </md-input-container>
+
+  <br><br>
+  <button md-raised-button md-ripple (click)="submitEmail()">Submit</button>
+</div>

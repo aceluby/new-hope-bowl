@@ -1,0 +1,102 @@
+appuser
+test@nhb
+
+CREATE TABLE volleyball_league (
+"id" SERIAL
+, "year" NUMERIC(4, 0) NOT NULL
+, "name" TEXT NOT NULL
+, "day" TEXT NOT NULL
+, "is_playoffs" BOOLEAN DEFAULT false
+, PRIMARY KEY ("id")
+);
+
+INSERT INTO volleyball_league (year, name, day) values
+  (2017, 'Lower Level', 'Sunday'),
+  (2017, 'Upper Level', 'Sunday'),
+  (2017, 'Lower Level', 'Monday'),
+  (2017, 'Upper Level', 'Monday'),
+  (2017, 'Lower Level', 'Tuesday'),
+  (2017, 'Upper Level', 'Tuesday'),
+  (2017, 'Lower Level', 'Wednesday'),
+  (2017, 'Upper Level', 'Wednesday'),
+  (2017, 'Lower Level', 'Thursday'),
+  (2017, 'Upper Level', 'Thursday');
+
+CREATE TABLE volleyball_team (
+"id" SERIAL
+, "name" TEXT NOT NULL
+, "league_id" NUMERIC NOT NULL
+, "division" TEXT NOT NULL
+, "wins" NUMERIC(2, 0) DEFAULT 0
+, "losses" NUMERIC(2, 0) DEFAULT 0
+, "division_wins" NUMERIC(2, 0) DEFAULT 0
+, "points_for" NUMERIC(3, 0) DEFAULT 0
+, "points_against" NUMERIC(3, 0) DEFAULT 0
+, "diff" NUMERIC(3, 0) DEFAULT 0
+, PRIMARY KEY ("id")
+);
+
+INSERT INTO volleyball_team (name, league_id, division) values
+  ('Bear Park', 1, 'Blue'),
+  ('Zero Gravity', 1, 'Blue'),
+  ('Spike Em Harder', 1, 'Blue'),
+  ('Moms Digging Balls', 1, 'Blue'),
+  ('Ace Ventura Set Detective', 1, 'Red'),
+  ('Hit Or Miss', 1, 'Red'),
+  ('Moms Spaghetti', 1, 'Red'),
+  ('BOB1', 1, 'Red'),
+  ('How I Set Your Mother', 2, 'Blue'),
+  ('Jumping Starfish', 2, 'Blue'),
+  ('Sets On The Beach', 2, 'Blue'),
+  ('Balls And Dolls', 2, 'Blue'),
+  ('Setting Ducks', 2, 'Blue'),
+  ('Another Team', 2, 'Blue');
+
+CREATE TABLE volleyball_game (
+"id" SERIAL
+, "team_one_id" NUMERIC NOT NULL
+, "team_one_home" BOOLEAN DEFAULT true
+, "team_one_score_g1" NUMERIC(2, 0)
+, "team_one_win_g1" BOOLEAN DEFAULT false
+, "team_one_score_g2" NUMERIC(2, 0)
+, "team_one_win_g2" BOOLEAN DEFAULT false
+, "team_one_score_g3" NUMERIC(2, 0)
+, "team_one_win_g3" BOOLEAN DEFAULT false
+, "team_two_id" NUMERIC NOT NULL
+, "team_two_score_g1" NUMERIC(2, 0)
+, "team_two_win_g1" BOOLEAN DEFAULT false
+, "team_two_score_g2" NUMERIC(2, 0)
+, "team_two_win_g2" BOOLEAN DEFAULT false
+, "team_two_score_g3" NUMERIC(2, 0)
+, "team_two_win_g3" BOOLEAN DEFAULT false
+, "divisional_game" BOOLEAN DEFAULT FALSE
+, "date" TEXT
+, "time" TEXT
+, "court" NUMERIC(1, 0)
+, PRIMARY KEY ("id")
+);
+
+CREATE TABLE playoff (
+"id" SERIAL
+, "league_id" NUMERIC NOT NULL
+, "game1_id" NUMERIC
+, "game2_id" NUMERIC
+, "game3_id" NUMERIC
+, "game4_id" NUMERIC
+, "game5_id" NUMERIC
+, "game6_id" NUMERIC
+, "game7_id" NUMERIC
+, "game8_id" NUMERIC
+, "game9_id" NUMERIC
+, "game10_id" NUMERIC
+, "game11_id" NUMERIC
+, "game12_id" NUMERIC
+, PRIMARY KEY ("id")
+);
+
+CREATE TABLE wedding_food (
+"id" SERIAL
+, "name" TEXT NOT NULL
+, "type" TEXT NOT NULL
+, PRIMARY KEY ("id")
+);

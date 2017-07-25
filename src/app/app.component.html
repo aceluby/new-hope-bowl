@@ -1,0 +1,92 @@
+<!--The whole content below can be removed with the new code.-->
+<md-sidenav-container fullscreen>
+  <md-menu #bowlingMenu="mdMenu">
+    <button md-menu-item (click)="selectMenu('Open Bowling')"> Open Bowling </button>
+    <button md-menu-item (click)="selectMenu('League Bowling')"> League Bowling </button>
+    <button md-menu-item (click)="selectMenu('Join a League')"> Join a League </button>
+    <button md-menu-item (click)="selectMenu('Moonlight Bowling')"> Moonlight Bowling </button>
+  </md-menu>
+  <md-menu #foodAndDrinksMenu="mdMenu">
+    <button md-menu-item  (click)="selectMenu('Italian Pie Shoppe')"> Italian Pie Shoppe </button>
+    <button md-menu-item  (click)="selectMenu('Happy Hour')"> Happy Hour </button>
+  </md-menu>
+  <md-menu #eventsMenu="mdMenu">
+    <button md-menu-item  (click)="selectMenu('Weddings')"> Weddings </button>
+    <button md-menu-item  (click)="selectMenu('Corporate Events')"> Corporate Events </button>
+    <button md-menu-item  (click)="selectMenu('Birthday Parties')"> Birthday Parties </button>
+  </md-menu>
+  <md-menu #volleyballMenu="mdMenu">
+    <button md-menu-item  (click)="selectMenu('League Information')"> League Information </button>
+    <button md-menu-item  (click)="selectMenu('Rules')"> Rules </button>
+    <button md-menu-item  (click)="selectMenu('Schedules')"> Schedules </button>
+    <button md-menu-item  (click)="selectMenu('Weather Policies')"> Weather Policies </button>
+  </md-menu>
+
+  <md-toolbar color="accent">
+    <button md-button md-ripple (click)="selectMenu('Home')" type="button" >
+      Home
+    </button>
+    <button md-button md-ripple [mdMenuTriggerFor]="bowlingMenu" type="button">
+      Bowling
+    </button>
+    <button md-button md-ripple [mdMenuTriggerFor]="foodAndDrinksMenu" type="button">
+      Food and Drinks
+    </button>
+    <button md-button md-ripple [mdMenuTriggerFor]="eventsMenu" type="button">
+      Events
+    </button>
+    <button md-button md-ripple [mdMenuTriggerFor]="volleyballMenu" type="button" >
+      Volleyball
+    </button>
+    <button md-button md-ripple (click)="selectMenu('Contact Us')" type="button" >
+      Contact Us
+    </button>
+    <button md-button md-ripple (click)="selectMenu('Admin')" type="button" *ngIf="admin" >
+      Admin
+    </button>
+    <span style="flex: 1 1 auto;"></span>
+    <button md-icon-button (click)="login()" type="button" *ngIf="!admin"> <!--login-->
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="#000000" d="M10,17.25V14H3V10H10V6.75L15.25,12L10,17.25M8,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H8A2,2 0 0,1 6,20V16H8V20H17V4H8V8H6V4A2,2 0 0,1 8,2Z"/>
+      </svg>
+    </button>
+    <button md-icon-button (click)="logout()" type="button" *ngIf="admin"> <!--login-->
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="#000000" d="M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z"/>
+      </svg>
+    </button>
+    <a md-icon-button href="https://www.facebook.com/newhopebowl/"> <!--facebook-->
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="#000000" d="M17,2V2H17V6H15C14.31,6 14,6.81 14,7.5V10H14L17,10V14H14V22H10V14H7V10H10V6A4,4 0 0,1 14,2H17Z" />
+      </svg>
+    </a>
+    <a md-icon-button href="https://twitter.com/newhopebowl?lang=en"> <!--twitter-->
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="#000000" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" />
+      </svg>
+    </a>
+
+
+  </md-toolbar>
+  <div *ngIf="selectedPage=='Home'"><home-component></home-component></div>
+  <div *ngIf="selectedPage=='Open Bowling'"><open-bowling-component></open-bowling-component></div>
+  <div *ngIf="selectedPage=='League Bowling'"><league-bowling-component></league-bowling-component></div>
+  <div *ngIf="selectedPage=='Join a League'"><join-a-league-component></join-a-league-component></div>
+  <div *ngIf="selectedPage=='Moonlight Bowling'"><moonlight-bowling-component></moonlight-bowling-component></div>
+  <div *ngIf="selectedPage=='Weddings'"><weddings-component></weddings-component></div>
+  <div *ngIf="selectedPage=='Corporate Events'"><corporate-events-component></corporate-events-component></div>
+  <div *ngIf="selectedPage=='Birthday Parties'"><birthday-parties-component></birthday-parties-component></div>
+  <div *ngIf="selectedPage=='Italian Pie Shoppe'"><italian-pie-shoppe-component></italian-pie-shoppe-component></div>
+  <div *ngIf="selectedPage=='Happy Hour'"><happy-hour-component></happy-hour-component></div>
+  <div *ngIf="selectedPage=='League Information'"><league-information-component></league-information-component></div>
+  <div *ngIf="selectedPage=='Rules'"><rules-component></rules-component></div>
+  <div *ngIf="selectedPage=='Schedules'"><schedules-component></schedules-component></div>
+  <div *ngIf="selectedPage=='Weather Policies'"><weather-policies-component></weather-policies-component></div>
+  <div *ngIf="selectedPage=='Contact Us'"><contact-us-component></contact-us-component></div>
+  <div *ngIf="selectedPage=='Admin'"><admin-component></admin-component></div>
+
+</md-sidenav-container>
+
+
+
+

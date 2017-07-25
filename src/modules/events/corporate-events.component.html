@@ -1,0 +1,36 @@
+<div>
+  <md-card>
+    <img md-card-image src="../../assets/corporate_banner.jpeg" style="height: 150px">
+  </md-card>
+  <md-toolbar>7107 42nd Avenue N | New Hope, MN 55427 | (763) 537-9376</md-toolbar>
+  <md-grid-list cols="2" rowHeight="1.5:1">
+    <md-grid-tile>
+      <md-card align="center">
+        <img md-card-lg-image src="../../assets/corporate_pic.jpeg" >
+        <br><br><br><br>
+        <md-card-content align="left">
+          Tired of the same old office malarkey? Get out of the office and have some fun with your co-workers in a copier/fax machine-free zone! We have played host to many different companies as small as 10 people to as large as hundreds. Think you have what it takes to win bragging rights this year? You'll never know if you don't book your event here ASAP.
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile>
+      <md-card>
+        <md-card-header><h2>Contact Us Today!</h2></md-card-header>
+        <md-card-content>
+          <md-input-container style="width: 100%">
+            <input type="email" mdInput placeholder="Email Address" [(ngModel)]="email" email required>
+            <md-error>Invalid email address</md-error>
+          </md-input-container>
+          <md-input-container style="width: 100%">
+            <input mdInput placeholder="Subject" [(ngModel)]="subject" required>
+          </md-input-container>
+          <md-input-container style="width: 100%">
+            <textarea rows="6" mdInput placeholder="Message" [(ngModel)]="message" required></textarea>
+          </md-input-container>
+          <br><br>
+          <button md-raised-button md-ripple (click)="submitEmail()">Submit</button>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
+</div>

@@ -1,0 +1,169 @@
+<div>
+  <md-toolbar>
+    <div *ngFor="let menuItem of menu">
+      <button md-button md-ripple (click)="selectMenuItem(menuItem)" type="button">
+        {{menuItem}}
+      </button>
+    </div>
+  </md-toolbar>
+  <div *ngIf="selectedMenu=='Italian Pie Shoppe'">
+    <md-grid-list cols="3" rowHeight=".7:1">
+      <md-grid-tile colspan="2">
+        <md-card>
+          <img md-card-lg-image src="../../assets/thin_crust_pizza.jpg" style="height: 500px;">
+        </md-card>
+      </md-grid-tile>
+      <md-grid-tile>
+        <md-card>
+          <md-card-header><h2>Hours</h2></md-card-header>
+          <md-card-content>
+            <md-list>
+              <md-list-item>Monday - Thursday : 4pm - 10pm</md-list-item>
+              <md-list-item>Friday : 4pm - 11pm</md-list-item>
+              <md-list-item>Saturday: 12pm - 11pm</md-list-item>
+              <md-list-item>Sunday : 12pm - 9pm</md-list-item>
+            </md-list>
+          </md-card-content>
+        </md-card>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+  <div *ngIf="selectedMenu=='Appetizers'">
+    <md-grid-list cols="3" rowHeight="1.2:1">
+      <div *ngFor="let app of appetizers">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 275px;">
+            <md-card-header><h2>{{app.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="app.img != null" [src]=app.img>
+            <br>
+            <md-divider *ngIf="app.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              {{app.description}}
+            </md-card-content>
+            <md-card-footer>{{app.price}}</md-card-footer>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+  </div>
+  <div *ngIf="selectedMenu=='Salads/Wraps'">
+    <md-grid-list cols="3" rowHeight="1.2:1">
+      <div *ngFor="let app of saladWraps">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 275px;">
+            <md-card-header><h2>{{app.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="app.img != null" [src]=app.img>
+            <br>
+            <md-divider *ngIf="app.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              {{app.description}}
+            </md-card-content>
+            <md-card-footer>{{app.price}}</md-card-footer>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+  </div>
+  <div *ngIf="selectedMenu=='Sandwiches'">
+    <md-grid-list cols="3" rowHeight="1.2:1">
+      <div *ngFor="let app of sandwiches">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 275px;">
+            <md-card-header><h2>{{app.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="app.img != null" [src]=app.img>
+            <br>
+            <md-divider *ngIf="app.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              {{app.description}}
+            </md-card-content>
+            <md-card-footer>{{app.price}}</md-card-footer>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+  </div>
+  <div *ngIf="selectedMenu=='Burgers'">
+    <md-grid-list cols="3" rowHeight="1.2:1">
+      <div *ngFor="let app of burgers">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 275px;">
+            <md-card-header><h2>{{app.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="app.img != null" [src]=app.img>
+            <br>
+            <md-divider *ngIf="app.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              {{app.description}}
+            </md-card-content>
+            <md-card-footer>{{app.price}}</md-card-footer>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+  </div>
+  <div *ngIf="selectedMenu=='Pizza'">
+    <h1>Build Your Own Pizza</h1>
+    <md-grid-list cols="2" rowHeight="1.5:1">
+      <div *ngFor="let pizza of buildYourOwnPizza">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 350px;">
+            <md-card-header><h2>{{pizza.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="pizza.img != null" [src]=pizza.img>
+            <br>
+            <md-divider *ngIf="pizza.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              <div *ngFor="let sizeAndPrice of pizza.sizeAndPrice">
+                {{sizeAndPrice.size}} - {{sizeAndPrice.price}} -- Extra Toppings: {{sizeAndPrice.extraToppings}}
+              </div>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+    <h1>Deep Dish Specialties</h1>
+    <md-grid-list cols="3" rowHeight="1.2:1">
+      <div *ngFor="let pizza of deepDishSpecialties">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 275px;">
+            <md-card-header><h2>{{pizza.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="pizza.img != null" [src]=pizza.img>
+            <br>
+            <md-divider *ngIf="pizza.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              <div *ngFor="let sizeAndPrice of pizza.sizeAndPrice">
+                {{sizeAndPrice.size}} - {{sizeAndPrice.price}}
+              </div>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+    <h1>Thin Dish Specialties</h1>
+    <md-grid-list cols="3" rowHeight="1:1">
+      <div *ngFor="let pizza of thinCrustSpecialties">
+        <md-grid-tile>
+          <md-card style="height: 275px; width: 275px;">
+            <md-card-header><h2>{{pizza.name}}</h2></md-card-header>
+            <img md-card-md-image *ngIf="pizza.img != null" [src]=pizza.img>
+            <br>
+            <md-divider *ngIf="pizza.img==null"></md-divider>
+            <br>
+            <md-card-content>
+              <div *ngFor="let sizeAndPrice of pizza.sizeAndPrice">
+                {{sizeAndPrice.size}} - {{sizeAndPrice.price}}
+              </div>
+            </md-card-content>
+          </md-card>
+        </md-grid-tile>
+      </div>
+    </md-grid-list>
+  </div>
+  <div *ngIf="selectedMenu=='Specials'">
+    Specials go here
+  </div>
+</div>

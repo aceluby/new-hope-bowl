@@ -1,0 +1,22 @@
+<div>
+  <md-toolbar>
+    <div *ngFor="let league of leagues | uniqueday">
+      <button md-button md-ripple (click)="selectDay(league.day)" type="button" >
+        {{league.day}}
+      </button>
+    </div>
+    <md-toolbar-row *ngIf="selectedDay!=''">
+      <div *ngFor="let league of leaguesOnSelectedDay">
+        <button md-button md-ripple (click)="selectLeague(league)" type="button" >
+          {{league.name}}
+        </button>
+      </div>
+    </md-toolbar-row>
+  </md-toolbar>
+  <md-card *ngIf="selectedLeague == null">
+    <img md-card-image src="../../assets/strike.jpg" style="height: 400px">
+  </md-card>
+  <md-card *ngIf="selectedLeague != null">
+    <img md-card-image [src]="selectedLeague.url">
+  </md-card>
+</div>
