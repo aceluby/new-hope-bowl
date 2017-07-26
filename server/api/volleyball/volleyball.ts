@@ -333,8 +333,6 @@ let insertGameDb = function (game: VolleyballGame) {
                if (err) {
                  return console.error('error running query insertGameDb', err);
                }
-               console.log(result);
-               console.log(game);
              });
 
 };

@@ -14,8 +14,6 @@ import bodyParser = require('body-parser');
  */
 const port = normalizePort(process.env.PORT || serverPort || 5000);
 const host = process.env.HOST || '0.0.0.0';
-console.log('port ', port);
-console.log('host', host);
 app.set('port', port);
 app.set('host', host);
 

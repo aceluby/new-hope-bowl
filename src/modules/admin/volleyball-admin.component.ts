@@ -111,8 +111,6 @@ export class VolleyballAdminComponent{
   }
 
   private getLeagueSchedule(league : VolleyballLeague) : VolleyballGame[] {
-    console.log(this.schedules);
-    console.log(this.schedules.filter(game => game.teamOne == null));
     return this.schedules
       .filter(game => game.teamOne.league.name === league.name &&
       game.teamOne.league.day === league.day)
@@ -392,16 +390,13 @@ export class VolleyballAdminComponent{
       }
     });
 
-    console.log(upperTeams);
 
     let lowerDivisionBlue = lowerTeams.filter(team => team.division == 'Blue');
     let lowerDivisionRed = lowerTeams.filter(team => team.division == 'Red');
     for (let week = 0; week < 12; week++) {
-      console.log(week);
       let d = new Date(day);
       d.setDate(d.getDate() + (7));
       day = this.formatDate(d);
-      console.log(day);
 
       switch (week) {
         case 0:
@@ -672,7 +667,6 @@ export class VolleyballAdminComponent{
     let game = {id: null, teamOne: team1, teamOneHome: true, teamOneScoreGameOne: null, teamOneScoreGameTwo: null, teamOneScoreGameThree: null, teamOneWinGameOne: null, teamOneWinGameTwo: null, teamOneWinGameThree: null,
       teamTwo: team2, teamTwoScoreGameOne: null, teamTwoScoreGameTwo: null, teamTwoScoreGameThree: null, teamTwoWinGameOne: null, teamTwoWinGameTwo: null, teamTwoWinGameThree: null,
       divisionalGame: null, date: date, time: time, court: court};
-    console.log(game);
     return game;
   }
 

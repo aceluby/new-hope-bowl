@@ -65,26 +65,21 @@ export class WeddingsComponent {
     this.starchMenu = new Array();
     this.vegetableMenu = new Array();
     this.foodMenu.forEach(item => {
-      console.log(item.type);
       switch (item.type) {
         case 'Entree' : {
           this.entreeMenu.push(item);
-          console.log(item.type);
           break;
         }
         case 'Salad' : {
           this.saladMenu.push(item);
-          console.log(item.type);
           break;
         }
         case 'Starch' : {
           this.starchMenu.push(item);
-          console.log(item.type);
           break;
         }
         case 'Vegetable' : {
           this.vegetableMenu.push(item);
-          console.log(item.type);
           break;
         }
       }

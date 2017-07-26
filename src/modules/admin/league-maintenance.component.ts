@@ -1,7 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {VolleyballLeaguesService} from "../../services/volleyball/volleyball-leagues.service";
-import {VolleyballGame, VolleyballTeam, VolleyballLeague} from "../../domain/volleyball-league.domain";
-import * as _ from "dateformat";
+import {VolleyballLeague} from '../../domain/volleyball-league.domain';
 
 @Component({
   selector: 'league-maintenance-component',

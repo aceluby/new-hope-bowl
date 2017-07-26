@@ -44,7 +44,6 @@ app.use(forceSSL());
 if (process.env.NODE_ENV === 'production') {
 
   // in production mode run application from dist folder
-  console.log(CLIENT);
   app.use(express.static(CLIENT));
   app.use(favicon(FAVICON));
 

@@ -131,7 +131,6 @@ export class VolleyballLeaguesService {
   }
 
   saveSchedules(volleyball: VolleyballGame[]): Promise<any> {
-    console.log("saving schedules");
     return this.http.post(`/api/volleyball_leagues/schedules`, volleyball)
       .map(res => res.json())
       .finally(() => this.openSnackBar("Schedules Saved"))
