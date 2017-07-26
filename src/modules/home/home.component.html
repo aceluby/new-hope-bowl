@@ -1,7 +1,7 @@
 <div>
   <md-toolbar>
     <span>7107 42nd Avenue N | New Hope, MN 55427 | (763) 537-9376</span>
-    <md-toolbar-row  *ngIf="applicableNews != null">
+    <md-toolbar-row  *ngIf="applicableNews != null && applicableNews.length > 0">
       <marquee behavior="scroll" direction="left" scrollamount="15">
         <p *ngIf="applicableNews.length >= 4">
           &emsp;{{applicableNews[0].headline}}:&emsp;{{applicableNews[0].details}}&emsp;
