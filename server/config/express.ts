@@ -47,6 +47,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(CLIENT));
   app.use(favicon(FAVICON));
 
+  var nullfun = function () {};
+  console.log = nullfun;
+  console.info = nullfun;
+  console.error = nullfun;
+  console.warn = nullfun;
+
   // Define lazy loaded routes
 }
 
