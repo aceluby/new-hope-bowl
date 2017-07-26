@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json & npm run _server:run",
     "build": "ng build",
-    "prod:build": "ng build --prod --aot --output-path=dist/client && cross-env NODE_ENV=production npm run _server:build",
+    "prod:build": "ng build --prod --aot --output-path=dist/client && npm run _server:build",
     "_server:build": "tsc -p ./server",
     "export_variables": "export NODE_PATH=/app/node_modules",
     "prod:server": "NODE_ENV=production node dist/server/app.js",
@@ -17,7 +17,7 @@
     "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/app.js\" ",
     "startHeroku": "export NODE_PATH=/app/node_modules && NODE_ENV=development && npm run build && npm run start_prod && npm run _server:runHeroku",
     "_server:runHeroku": "tsc -p ./server && node dist/server/app.js",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build --prod --aot --output-path=dist/client && npm run _server:build",
     "deploy": "git push heroku master"
   },
   "private": true,
@@ -77,5 +77,9 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "tslint": "~5.3.2"
+  },
+  "engines": {
+    "node": "8.1.0",
+    "npm": "5.0.4"
   }
 }
