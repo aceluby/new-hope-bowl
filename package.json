@@ -10,7 +10,7 @@
     "prod:build": "ng build --prod --aot --output-path=dist/client && npm run _server:build",
     "_server:build": "tsc -p ./server",
     "export_variables": "export NODE_PATH=/app/node_modules",
-    "prod:server": "NODE_ENV=production node  --optimize_for_size --max_old_space_size=102.4 dist/server/app.js",
+    "prod:server": "NODE_ENV=production node  --optimize_for_size --max_old_space_size=410 dist/server/app.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
