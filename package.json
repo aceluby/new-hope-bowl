@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/app.js\" ",
-    "startHeroku": "echo $NODE_PATH & pwd & ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --port 4200 & npm run _server:runHeroku",
+    "startHeroku": "export NODE_PATH=/app/node_modules & echo $NODE_PATH & pwd & ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --port 4200 & npm run _server:runHeroku",
     "_server:runHeroku": "tsc -p ./server && node dist/server/app.js",
     "postinstall": "ng build --aot -prod",
     "deploy": "git push heroku master"
