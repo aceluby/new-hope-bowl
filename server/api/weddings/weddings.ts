@@ -1,10 +1,23 @@
 import {Router, Response, Request} from 'express';
 import * as pg from 'pg';
+pg.defaults.ssl = true;
 
 const weddingRouter: Router = Router();
 export {weddingRouter}
+
+const url = require('url');
+const params = url.parse(process.env.DATABASE_URL);
+const auth = params.auth.split(':');
+const prodConfig = {
+  user: auth[0],
+  password: auth[1],
+  host: params.hostname,
+  port: params.port,
+  database: params.pathname.split('/')[1],
+  ssl: true
+};
 var config = {
-  user: 'appuser', //env var: PGUSER
+  user: ('appuser'), //env var: PGUSER
   database: 'nhb', //env var: PGDATABASE
   password: 'appuser', //env var: PGPASSWORD
   port: 5433, //env var: PGPORT
@@ -12,7 +25,8 @@ var config = {
   idleTimeoutMillis: 10000, // how long a client is allowed to remain idle before being closed
   Promise,
 };
-let pool = new pg.Pool(config);
+
+let pool = process.env.NODE_ENV == 'production' ? new pg.Pool(prodConfig) : new pg.Pool(config);
 
 pool.on('error', (err, client) => {
   console.error('idle client error', err.message, err.stack)
