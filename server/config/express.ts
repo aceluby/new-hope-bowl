@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === 'production') {
 
   // in production mode run application from dist folder
   app.use(express.static(CLIENT));
+  app.use(express.static(CLIENT + '/assets', { maxAge: 86400000 /* 1d */ }));
   app.use(favicon(FAVICON));
 
   var nullfun = function () {};
