@@ -1,13 +1,8 @@
-import { healthRouter } from './api/health/health';
 import {bowlingLeagueRouter} from "./api/bowling/leagues";
 import {openBowlingRouter} from "./api/bowling/open-bowling";
 import {volleyballLeagueRouter} from "./api/volleyball/volleyball";
 import {newsRouter} from "./api/news/news";
 import {weddingRouter} from './api/weddings/weddings';
-// TODO: fix these imports to be like the above
-let request = require('request');
-let HttpsAgent = require('agentkeepalive').HttpsAgent;
-let xml2js = require('xml2js');
 
 export default function(app) {
 
@@ -43,10 +38,6 @@ export default function(app) {
       } );
     });
 
-  let agent = new HttpsAgent();
-  let parser = new xml2js.Parser({explicitArray : false, trim: true, ignoreAttrs: true, async: true});
-
-  // define unknown routes (error handling) last
 
   app.route('/api/*')
     .all((req, res) => {

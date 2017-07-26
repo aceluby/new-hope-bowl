@@ -13,7 +13,7 @@ import bodyParser = require('body-parser');
  * Get port from environment and store in Express.
  */
 const port = normalizePort(process.env.PORT || serverPort);
-const host = process.env.HOST || '0.0.0.0';
+const host = process.env.HOST || 'localhost';
 app.set('port', port);
 
 

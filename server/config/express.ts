@@ -7,8 +7,8 @@ import { default as routesFnc } from '../routes';
 import * as favicon from 'serve-favicon';
 
 const app: express.Application = express();
-const ROOT = path.join(path.resolve(__dirname, '..'));
 const CLIENT = path.join(path.resolve(__dirname, '../../client'));
+const FAVICON = path.join(path.resolve(__dirname, '../../client/favicon.ico'));
 
 app.set('x-powered-by', false);
 
@@ -28,18 +28,28 @@ app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
-const forceSSL = function() {
-  return function (req, res, next) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(
-        ['https://', req.get('Host'), req.url].join('')
-      );
-    }
-    next();
-  }
-};
+// const forceSSL = function() {
+//   return function (req, res, next) {
+//     if (req.headers['x-forwarded-proto'] !== 'https') {
+//       return res.redirect(
+//         ['https://', req.get('Host'), req.url].join('')
+//       );
+//     }
+//     next();
+//   }
+// };
+//
+// app.use(forceSSL());
 
-app.use(forceSSL());
+if (process.env.NODE_ENV === 'production') {
+
+  // in production mode run application from dist folder
+  console.log(CLIENT);
+  app.use(express.static(CLIENT));
+  app.use(favicon(FAVICON));
+
+  // Define lazy loaded routes
+}
 
 // register the routes for the api
 routesFnc(app);

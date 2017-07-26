@@ -2,15 +2,20 @@
   "name": "new-hope-bowl",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "server/app.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json & npm run _server:run",
     "build": "ng build",
+    "prod:build": "ng build --prod --aot --output-path=dist/client && cross-env NODE_ENV=production npm run _server:build",
+    "_server:build": "tsc -p ./server",
+    "export_variables": "export NODE_PATH=/app/node_modules",
+    "prod:server": "NODE_ENV=production node dist/server/app.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/app.js\" ",
-    "startHeroku": "export NODE_PATH=/app/node_modules && echo $NODE_PATH && pwd & ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --port 4200 && npm run _server:runHeroku",
+    "startHeroku": "export NODE_PATH=/app/node_modules && NODE_ENV=development && npm run build && npm run start_prod && npm run _server:runHeroku",
     "_server:runHeroku": "tsc -p ./server && node dist/server/app.js",
     "postinstall": "ng build --aot -prod",
     "deploy": "git push heroku master"
@@ -44,6 +49,7 @@
     "concurrently": "^3.5.0",
     "core-js": "^2.4.1",
     "cors": "^2.8.3",
+    "cross-env": "^5.0.1",
     "dateformat": "^2.0.0",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
@@ -72,7 +78,7 @@
     "protractor": "~5.1.2",
     "tslint": "~5.3.2"
   },
-  "engines" : {
+  "engines": {
     "node": "8.1.0",
     "npm": "5.0.4"
   }
