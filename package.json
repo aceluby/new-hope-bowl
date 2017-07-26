@@ -77,9 +77,5 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "tslint": "~5.3.2"
-  }//,
-//  "engines": {
-//    "node": "8.1.0",
-//    "npm": "5.0.4"
-//  }
+  }
 }
