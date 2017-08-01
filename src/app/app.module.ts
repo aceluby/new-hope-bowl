@@ -8,8 +8,7 @@ import {
   MdGridListModule, MdTabsModule, MdInputModule, MdSelectModule, MdDialogModule, MdChipsModule, MdDatepickerModule,
   MdNativeDateModule, MdCheckboxModule, MdSnackBarModule
 } from '@angular/material';
-import { RouterModule, Routes } from '@angular/router';
-import {AppComponent, LoginDialogComponent} from './app.component';
+import {AppComponent} from './app.component';
 import {HomeComponent} from "../modules/home/home.component";
 import {OpenBowlingComponent} from "../modules/bowling/open-bowling.component";
 import {CarouselComponent} from "../modules/home/carousel.component";
@@ -44,11 +43,12 @@ import {PlayoffsComponent} from "../modules/volleyball/playoffs.component";
 import {UniqueYearPipe} from '../modules/common/pipes/unique-year.component';
 import {WeddingService} from '../services/wedding/wedding.service';
 import {WeddingMenuComponent} from '../modules/admin/wedding-menu-admin.component';
+import {UsersComponent} from '../modules/admin/users.component';
+import {AdminService} from '../services/admin/admin.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginDialogComponent,
     HomeComponent,
     CarouselComponent,
     OpenBowlingComponent,
@@ -81,7 +81,8 @@ import {WeddingMenuComponent} from '../modules/admin/wedding-menu-admin.componen
     PlayoffsComponent,
     WeddingMenuComponent,
     BowlingLeagueDialogComponent,
-    WeddingDialogComponent
+    WeddingDialogComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +112,6 @@ import {WeddingMenuComponent} from '../modules/admin/wedding-menu-admin.componen
   entryComponents: [
     EmailDialogComponent,
     BowlingDialogComponent,
-    LoginDialogComponent,
     ResetDialogConfirmComponent,
     BowlingLeagueDialogComponent,
     WeddingDialogComponent
@@ -121,7 +121,8 @@ import {WeddingMenuComponent} from '../modules/admin/wedding-menu-admin.componen
     OpenBowlingService,
     VolleyballLeaguesService,
     NewsService,
-    WeddingService
+    WeddingService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

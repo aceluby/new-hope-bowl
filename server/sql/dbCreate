@@ -100,3 +100,11 @@ CREATE TABLE wedding_food (
 , "type" TEXT NOT NULL
 , PRIMARY KEY ("id")
 );
+
+CREATE TABLE users (
+"id" SERIAL
+, "name" TEXT NOT NULL
+, "email" TEXT NOT NULL
+, "roles" TEXT NOT NULL
+)
+

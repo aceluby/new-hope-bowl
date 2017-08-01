@@ -43,6 +43,7 @@
     "@types/pg": "^6.1.42",
     "@types/serve-favicon": "^2.2.28",
     "agentkeepalive": "^3.3.0",
+    "angular2-google-login": "^1.0.9",
     "angular2-text-mask": "^8.0.2",
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
@@ -80,6 +81,6 @@
   },
   "engines": {
     "node": "8.1.0",
-    "npm": "5.0.4"
+    "npm": "5.3.0"
   }
 }

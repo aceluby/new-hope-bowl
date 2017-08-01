@@ -28,20 +28,20 @@ app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
-const forceSSL = function() {
-  return function (req, res, next) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(
-        ['https://', req.get('Host'), req.url].join('')
-      );
-    }
-    next();
-  }
-};
-
-app.use(forceSSL());
-
 if (process.env.NODE_ENV === 'production') {
+
+  const forceSSL = function() {
+    return function (req, res, next) {
+      if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(
+          ['https://', req.get('Host'), req.url].join('')
+        );
+      }
+      next();
+    }
+  };
+
+  app.use(forceSSL());
 
   // in production mode run application from dist folder
   app.use(express.static(CLIENT));

@@ -19,6 +19,7 @@ export class HomeComponent {
       .subscribe(serverNews =>{
         this.news = serverNews;
         this.applicableNews = this.getApplicableNews();
+
       });
   }
 
@@ -28,6 +29,11 @@ export class HomeComponent {
   }
 
   private isApplicableNewsLine(today: number, newsLine) : boolean {
-    return today >= Date.parse(newsLine.startDate) && today <= Date.parse(newsLine.endDate);
+    return today >= this.parseDate(newsLine.startDate).getTime() && today <= this.parseDate(newsLine.endDate).getTime();
+  }
+
+  private parseDate(dateString) : Date {
+    let parsedDate = dateString.split(/[^0-9]/);
+    return new Date(parsedDate[2],parsedDate[1]-1,parsedDate[0]);
   }
 }

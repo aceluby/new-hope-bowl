@@ -87,7 +87,8 @@ const ADMIN_PAGES : string[] = [
   'Open Bowling',
   'Volleyball',
   'News',
-  'Wedding Menu'
+  'Wedding Menu',
+  'Users'
 ]
 
 @Component({

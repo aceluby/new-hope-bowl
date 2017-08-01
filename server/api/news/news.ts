@@ -12,7 +12,7 @@ export class News {
 }
 
 const NEWSLIST : News[] = [
-  {headline : "News!", details : "News Details", startDate: '01-01-2000', endDate: '12-31-2999'},
+  {headline : "News!", details : "News Details", startDate: '01-01-2000', endDate: '12-31-2029'},
 ];
 
 var newsList = NEWSLIST;
