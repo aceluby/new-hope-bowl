@@ -4,6 +4,7 @@ import {volleyballLeagueRouter} from "./api/volleyball/volleyball";
 import {newsRouter} from "./api/news/news";
 import {weddingRouter} from './api/weddings/weddings';
 import {adminRouter} from './api/admin/admin';
+import {emailRouter} from './api/email/email';
 
 export default function(app) {
 
@@ -15,6 +16,7 @@ export default function(app) {
   app.use('/api/news', newsRouter);
   app.use('/api/wedding', weddingRouter);
   app.use('/api/admin', adminRouter);
+  app.use('/api/email', emailRouter)
 
   app.route('/api/ping')
     .get((req, res) => {

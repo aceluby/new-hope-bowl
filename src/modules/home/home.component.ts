@@ -34,6 +34,6 @@ export class HomeComponent {
 
   private parseDate(dateString) : Date {
     let parsedDate = dateString.split(/[^0-9]/);
-    return new Date(parsedDate[2],parsedDate[1]-1,parsedDate[0]);
+    return new Date(parsedDate[2],parsedDate[0]-1,parsedDate[1]);
   }
 }

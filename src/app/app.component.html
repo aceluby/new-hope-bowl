@@ -1,29 +1,29 @@
 <!--The whole content below can be removed with the new code.-->
 <md-sidenav-container fullscreen>
   <md-menu #bowlingMenu="mdMenu">
-    <button md-menu-item (click)="selectMenu('Open Bowling')"> Open Bowling </button>
-    <button md-menu-item (click)="selectMenu('League Bowling')"> League Bowling </button>
-    <button md-menu-item (click)="selectMenu('Join a League')"> Join a League </button>
-    <button md-menu-item (click)="selectMenu('Moonlight Bowling')"> Moonlight Bowling </button>
+    <button md-menu-item (click)="selectMenu('Open Bowling')" [routerLink]="['/open_bowling']"> Open Bowling </button>
+    <button md-menu-item (click)="selectMenu('League Bowling')" [routerLink]="['/league_bowling']"> League Bowling </button>
+    <button md-menu-item (click)="selectMenu('Join a League')" [routerLink]="['/join_a_league']"> Join a League </button>
+    <button md-menu-item (click)="selectMenu('Moonlight Bowling')" [routerLink]="['/moonlight_bowling']"> Moonlight Bowling </button>
   </md-menu>
   <md-menu #foodAndDrinksMenu="mdMenu">
-    <button md-menu-item  (click)="selectMenu('Italian Pie Shoppe')"> Italian Pie Shoppe </button>
-    <button md-menu-item  (click)="selectMenu('Happy Hour')"> Happy Hour </button>
+    <button md-menu-item  (click)="selectMenu('Italian Pie Shoppe')" [routerLink]="['/italian_pie_shoppe']"> Italian Pie Shoppe </button>
+    <button md-menu-item  (click)="selectMenu('Happy Hour')" [routerLink]="['/happy_hour']"> Happy Hour </button>
   </md-menu>
   <md-menu #eventsMenu="mdMenu">
-    <button md-menu-item  (click)="selectMenu('Weddings')"> Weddings </button>
-    <button md-menu-item  (click)="selectMenu('Corporate Events')"> Corporate Events </button>
-    <button md-menu-item  (click)="selectMenu('Birthday Parties')"> Birthday Parties </button>
+    <button md-menu-item  (click)="selectMenu('Weddings')" [routerLink]="['/weddings']"> Weddings </button>
+    <button md-menu-item  (click)="selectMenu('Corporate Events')" [routerLink]="['/corporate_events']"> Corporate Events </button>
+    <button md-menu-item  (click)="selectMenu('Birthday Parties')" [routerLink]="['/birthday_parties']"> Birthday Parties </button>
   </md-menu>
   <md-menu #volleyballMenu="mdMenu">
-    <button md-menu-item  (click)="selectMenu('League Information')"> League Information </button>
-    <button md-menu-item  (click)="selectMenu('Rules')"> Rules </button>
-    <button md-menu-item  (click)="selectMenu('Schedules')"> Schedules </button>
-    <button md-menu-item  (click)="selectMenu('Weather Policies')"> Weather Policies </button>
+    <button md-menu-item  (click)="selectMenu('League Information')" [routerLink]="['/vb_league_information']"> League Information </button>
+    <button md-menu-item  (click)="selectMenu('Rules')" [routerLink]="['/vb_rules']"> Rules </button>
+    <button md-menu-item  (click)="selectMenu('Schedules')" [routerLink]="['/vb_schedules']"> Schedules </button>
+    <button md-menu-item  (click)="selectMenu('Weather Policies')" [routerLink]="['/weather_policies']"> Weather Policies </button>
   </md-menu>
 
   <md-toolbar color="accent">
-    <button md-button md-ripple (click)="selectMenu('Home')" type="button" >
+    <button md-button md-ripple (click)="selectMenu('Home')" type="button" [routerLink]="['/home']">
       Home
     </button>
     <button md-button md-ripple [mdMenuTriggerFor]="bowlingMenu" type="button">
@@ -38,19 +38,17 @@
     <button md-button md-ripple [mdMenuTriggerFor]="volleyballMenu" type="button" >
       Volleyball
     </button>
-    <button md-button md-ripple (click)="selectMenu('Contact Us')" type="button" >
+    <button md-button md-ripple (click)="selectMenu('Contact Us')" type="button" [routerLink]="['/contact_us']">
       Contact Us
     </button>
-    <button md-button md-ripple (click)="selectMenu('Admin')" type="button" *ngIf="admin" >
+    <button md-button md-ripple (click)="selectMenu('Admin')" type="button" *ngIf="userService.admin" [routerLink]="['/admin']">
       Admin
     </button>
     <span style="flex: 1 1 auto;"></span>
-    <button md-icon-button id="google-login-button" (click)="login()" type="button" *ngIf="!admin"> <!--login-->
-      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-        <path fill="#000000" d="M10,17.25V14H3V10H10V6.75L15.25,12L10,17.25M8,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H8A2,2 0 0,1 6,20V16H8V20H17V4H8V8H6V4A2,2 0 0,1 8,2Z"/>
-      </svg>
-    </button>
-    <button md-icon-button (click)="logout()" type="button" *ngIf="admin"> <!--login-->
+    <div *ngIf="!userService.admin"> <!--login-->
+      <login-component></login-component>
+    </div>
+    <button md-icon-button (click)="loginComponent.logout()" type="button" *ngIf="userService.admin"> <!--login-->
       <svg style="width:24px;height:24px" viewBox="0 0 24 24">
         <path fill="#000000" d="M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z"/>
       </svg>
@@ -68,23 +66,23 @@
 
 
   </md-toolbar>
-  <div *ngIf="selectedPage=='Home'"><home-component></home-component></div>
-  <div *ngIf="selectedPage=='Open Bowling'"><open-bowling-component></open-bowling-component></div>
-  <div *ngIf="selectedPage=='League Bowling'"><league-bowling-component></league-bowling-component></div>
-  <div *ngIf="selectedPage=='Join a League'"><join-a-league-component></join-a-league-component></div>
-  <div *ngIf="selectedPage=='Moonlight Bowling'"><moonlight-bowling-component></moonlight-bowling-component></div>
-  <div *ngIf="selectedPage=='Weddings'"><weddings-component></weddings-component></div>
-  <div *ngIf="selectedPage=='Corporate Events'"><corporate-events-component></corporate-events-component></div>
-  <div *ngIf="selectedPage=='Birthday Parties'"><birthday-parties-component></birthday-parties-component></div>
-  <div *ngIf="selectedPage=='Italian Pie Shoppe'"><italian-pie-shoppe-component></italian-pie-shoppe-component></div>
-  <div *ngIf="selectedPage=='Happy Hour'"><happy-hour-component></happy-hour-component></div>
-  <div *ngIf="selectedPage=='League Information'"><league-information-component></league-information-component></div>
-  <div *ngIf="selectedPage=='Rules'"><rules-component></rules-component></div>
-  <div *ngIf="selectedPage=='Schedules'"><schedules-component></schedules-component></div>
-  <div *ngIf="selectedPage=='Weather Policies'"><weather-policies-component></weather-policies-component></div>
-  <div *ngIf="selectedPage=='Contact Us'"><contact-us-component></contact-us-component></div>
-  <div *ngIf="selectedPage=='Admin'"><admin-component></admin-component></div>
-
+  <!--<div *ngIf="selectedPage=='Home'">here<home-component></home-component></div>-->
+  <!--<div *ngIf="selectedPage=='Open Bowling'"><open-bowling-component></open-bowling-component></div>-->
+  <!--<div *ngIf="selectedPage=='League Bowling'"><league-bowling-component></league-bowling-component></div>-->
+  <!--<div *ngIf="selectedPage=='Join a League'"><join-a-league-component></join-a-league-component></div>-->
+  <!--<div *ngIf="selectedPage=='Moonlight Bowling'"><moonlight-bowling-component></moonlight-bowling-component></div>-->
+  <!--<div *ngIf="selectedPage=='Weddings'"><weddings-component></weddings-component></div>-->
+  <!--<div *ngIf="selectedPage=='Corporate Events'"><corporate-events-component></corporate-events-component></div>-->
+  <!--<div *ngIf="selectedPage=='Birthday Parties'"><birthday-parties-component></birthday-parties-component></div>-->
+  <!--<div *ngIf="selectedPage=='Italian Pie Shoppe'"><italian-pie-shoppe-component></italian-pie-shoppe-component></div>-->
+  <!--<div *ngIf="selectedPage=='Happy Hour'"><happy-hour-component></happy-hour-component></div>-->
+  <!--<div *ngIf="selectedPage=='League Information'"><league-information-component></league-information-component></div>-->
+  <!--<div *ngIf="selectedPage=='Rules'"><rules-component></rules-component></div>-->
+  <!--<div *ngIf="selectedPage=='Schedules'"><schedules-component></schedules-component></div>-->
+  <!--<div *ngIf="selectedPage=='Weather Policies'"><weather-policies-component></weather-policies-component></div>-->
+  <!--<div *ngIf="selectedPage=='Contact Us'"><contact-us-component></contact-us-component></div>-->
+  <!--<div *ngIf="selectedPage=='Admin'"><admin-component></admin-component></div>-->
+  <router-outlet></router-outlet>
 </md-sidenav-container>
 
 

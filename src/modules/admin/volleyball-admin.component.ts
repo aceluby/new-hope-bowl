@@ -46,6 +46,7 @@ export class VolleyballAdminComponent{
       .retry(2)
       .subscribe(schedules =>{
         this.schedules = schedules;
+        this.sortSchedule();
       })
   }
 
@@ -362,9 +363,21 @@ export class VolleyballAdminComponent{
     this.schedules=new Array();
     this.startDate = '5/1/2017';
     this.generateSchedule(sundayTeams).forEach(game => this.schedules.push(game));
+    this.sortSchedule();
+    this.volleyballLeaguesService.saveSchedules(this.schedules);
+  }
 
-    this.volleyballLeaguesService.saveSchedules(this.schedules)
+  private sortSchedule() {
+    this.schedules.sort((game1, game2) => {
+      let gameOneTime = this.parseDate(game1.date).getTime();
+      let gameTwoTime = this.parseDate(game2.date).getTime();
+      return gameOneTime - gameTwoTime;
+    });
+  }
 
+  private parseDate(dateString) : Date {
+    let parsedDate = dateString.split(/[^0-9]/);
+    return new Date(parsedDate[2],parsedDate[0]-1,parsedDate[1],0,0);
   }
 
 
@@ -400,10 +413,10 @@ export class VolleyballAdminComponent{
 
       switch (week) {
         case 0:
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[1], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[3], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[1], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[3], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[1], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[3], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[1], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[3], day, '7:10', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[0], upperTeams[1], day, '8:05', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[2], upperTeams[3], day, '8:05', 2));
           returnSchedule.push(this.generateNewGame(upperTeams[4], upperTeams[5], day, '9:00', 1));
@@ -411,15 +424,15 @@ export class VolleyballAdminComponent{
         case 1:
           returnSchedule.push(this.generateNewGame(upperTeams[5], upperTeams[3], day, '6:15', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[1], upperTeams[4], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(upperTeams[0], upperTeams[2], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(upperTeams[0], upperTeams[2], day, '7:10', 2));
           returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[0], day, '7:10', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionBlue[2], day, '8:05', 2));
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionRed[0], day, '8:05', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionRed[2], day, '9:00', 2));
           break;
         case 2:
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[2], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionRed[1], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[2], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionRed[1], day, '6:15', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[2], day, '7:10', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionBlue[3], day, '7:10', 2));
           returnSchedule.push(this.generateNewGame(upperTeams[5], upperTeams[1], day, '8:05', 1));
@@ -436,8 +449,8 @@ export class VolleyballAdminComponent{
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionBlue[3], day, '9:00', 1));
           break;
         case 4:
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionBlue[2], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionBlue[1], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionBlue[2], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionBlue[1], day, '6:15', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionBlue[0], day, '7:10', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionBlue[3], day, '7:10', 2));
           returnSchedule.push(this.generateNewGame(upperTeams[2], upperTeams[1], day, '8:05', 1));
@@ -456,8 +469,8 @@ export class VolleyballAdminComponent{
         case 6:
           returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionBlue[0], day, '6:15', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[2], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionRed[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[3], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionRed[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[3], day, '7:10', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[1], upperTeams[0], day, '8:05', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[3], upperTeams[2], day, '8:05', 2));
           returnSchedule.push(this.generateNewGame(upperTeams[5], upperTeams[4], day, '9:00', 1));
@@ -465,17 +478,17 @@ export class VolleyballAdminComponent{
         case 7:
           returnSchedule.push(this.generateNewGame(upperTeams[3], upperTeams[5], day, '6:15', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[4], upperTeams[1], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(upperTeams[2], upperTeams[0], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[3], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[1], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[3], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(upperTeams[2], upperTeams[0], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[3], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[1], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[3], day, '8:05', 2));
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[1], day, '9:00', 2));
           break;
         case 8:
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[0], day, '6:15', 1));
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionRed[1], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[1], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[1], day, '7:10', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[1], upperTeams[5], day, '8:05', 1));
           returnSchedule.push(this.generateNewGame(upperTeams[4], upperTeams[2], day, '8:05', 2));
           returnSchedule.push(this.generateNewGame(upperTeams[3], upperTeams[0], day, '9:00', 1));
@@ -598,68 +611,67 @@ export class VolleyballAdminComponent{
           returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionBlue[1], day, '9:00', 2));
           break;
         case 6:
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionBlue[0], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[2], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionRed[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[3], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionBlue[0], day, '8:05', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionBlue[2], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[1], upperDivisionRed[0], day, '9:00', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[2], upperDivisionRed[3], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionBlue[0], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[2], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionRed[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[3], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionBlue[0], day, '8:05', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionBlue[2], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[1], upperDivisionRed[0], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[2], upperDivisionRed[3], day, '9:00', 1));
           break;
         case 7:
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[0], upperDivisionBlue[3], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionBlue[1], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[0], upperDivisionRed[3], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[2], upperDivisionRed[1], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[3], day, '8:05', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[1], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[3], day, '9:00', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[1], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[0], upperDivisionBlue[3], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionBlue[1], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[0], upperDivisionRed[3], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[2], upperDivisionRed[1], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionBlue[3], day, '8:05', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[1], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[0], lowerDivisionRed[3], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[1], day, '9:00', 1));
           break;
         case 8:
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[0], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionRed[1], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[1], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[2], upperDivisionRed[0], day, '8:05', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[3], upperDivisionRed[1], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionBlue[0], day, '9:00', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionBlue[1], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[2], lowerDivisionRed[0], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[3], lowerDivisionRed[1], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionBlue[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionBlue[1], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[2], upperDivisionRed[0], day, '8:05', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[3], upperDivisionRed[1], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionBlue[0], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionBlue[1], day, '9:00', 1));
           break;
         case 9:
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionRed[1], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionRed[2], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[0], upperDivisionRed[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionRed[3], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionRed[1], day, '8:05', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionRed[2], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionRed[0], day, '9:00', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionRed[3], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionRed[1], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionRed[2], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[0], upperDivisionRed[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionRed[3], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionRed[1], day, '8:05', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionRed[2], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionRed[0], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionRed[3], day, '9:00', 1));
           break;
         case 10:
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionRed[3], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionRed[2], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionBlue[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionRed[0], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionRed[3], day, '8:05', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionRed[2], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionRed[1], upperDivisionBlue[0], day, '9:00', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionRed[0], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionRed[3], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionRed[2], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionRed[1], lowerDivisionBlue[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionRed[0], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionRed[3], day, '8:05', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionRed[2], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionRed[1], upperDivisionBlue[0], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionRed[0], day, '9:00', 1));
           break;
         case 11:
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionRed[1], day, '6:15', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[0], upperDivisionRed[2], day, '6:15', 2));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionRed[0], day, '7:10', 1));
-          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionRed[3], day, '7:10', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionRed[1], day, '8:05', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionRed[2], day, '8:05', 2));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionRed[0], day, '9:00', 1));
-          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionRed[3], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[3], upperDivisionRed[1], day, '6:15', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[0], upperDivisionRed[2], day, '6:15', 1));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[2], upperDivisionRed[0], day, '7:10', 2));
+          returnSchedule.push(this.generateNewGame(upperDivisionBlue[1], upperDivisionRed[3], day, '7:10', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[3], lowerDivisionRed[1], day, '8:05', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[0], lowerDivisionRed[2], day, '8:05', 1));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[2], lowerDivisionRed[0], day, '9:00', 2));
+          returnSchedule.push(this.generateNewGame(lowerDivisionBlue[1], lowerDivisionRed[3], day, '9:00', 1));
           break;
       }
     }
-
     return returnSchedule;
   }
 

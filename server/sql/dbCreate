@@ -108,3 +108,20 @@ CREATE TABLE users (
 , "roles" TEXT NOT NULL
 )
 
+CREATE TABLE bowling_leagues (
+"id" SERIAL
+, "name" TEXT NOT NULL
+, "day" TEXT NOT NULL
+, "time" TEXT NOT NULL
+, "url" TEXT NOT NULL
+, "email" TEXT NOT NULL
+)
+
+CREATE TABLE open_bowl (
+"id" SERIAL
+, "day" TEXT NOT NULL
+, "start_time" TEXT NOT NULL
+, "end_time" TEXT NOT NULL
+, "price" TEXT NOT NULL
+)
+

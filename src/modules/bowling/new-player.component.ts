@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 @Component({
   selector: 'new-player-component',
   template: `
@@ -28,9 +28,7 @@ import {Component} from "@angular/core";
 
 export class NewPlayerComponent {
 
-  team : Player[] = [
-    {firstName: "", lastName: "", email: ""}
-  ];
+  @Input() team : Player[];
 
   addNewPlayer() {
     this.team.push({firstName: "", lastName: "", email: ""});
@@ -41,6 +39,7 @@ export class NewPlayerComponent {
       this.team.splice(playerIndex, 1);
     }
   }
+
 }
 
 export class Player {

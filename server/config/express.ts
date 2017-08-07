@@ -9,6 +9,7 @@ import * as favicon from 'serve-favicon';
 const app: express.Application = express();
 const CLIENT = path.join(path.resolve(__dirname, '../../client'));
 const FAVICON = path.join(path.resolve(__dirname, '../../client/favicon.ico'));
+const BOWLING_LEAGUE_UPLOADS = path.join(path.resolve(__dirname, '../uploads'));
 
 app.set('x-powered-by', false);
 
@@ -56,6 +57,8 @@ if (process.env.NODE_ENV === 'production') {
 
   // Define lazy loaded routes
 }
+console.log(BOWLING_LEAGUE_UPLOADS);
+app.use('/uploads', express.static(BOWLING_LEAGUE_UPLOADS));
 
 // register the routes for the api
 routesFnc(app);

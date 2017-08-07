@@ -109,10 +109,10 @@ export class Playoff {
   game12: VolleyballGame;
 }
 
-var leagues: VolleyballLeague[] = new Array();
-var teams: VolleyballTeam[] = new Array();
-var schedule: VolleyballGame[] = new Array();
-var playoffs: Playoff[] = new Array();
+let leagues: VolleyballLeague[] = new Array();
+let teams: VolleyballTeam[] = new Array();
+let schedule: VolleyballGame[] = new Array();
+let playoffs: Playoff[] = new Array();
 
 let mapRowToLeague = function (row): VolleyballLeague {
   let league = new VolleyballLeague();

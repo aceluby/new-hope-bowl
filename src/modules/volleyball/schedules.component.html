@@ -70,7 +70,7 @@
             <th>Game 2</th>
             <th>Game 3</th>
           </tr>
-          <tr *ngFor="let schedule of teamSchedule">
+          <tr *ngFor="let schedule of teamSchedule | orderbydate">
             <td align="center">{{schedule.date}}</td>
             <td align="center">{{schedule.time}}</td>
             <td align="center">{{schedule.court}}</td>

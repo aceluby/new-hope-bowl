@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {MdDialogRef, MdDialog} from "@angular/material";
 import {BowlingLeaguesService} from "../../services/bowling/bowling-leagues.service";
 import {OpenBowlingService} from "../../services/bowling/open-bowling.service";
@@ -8,6 +8,9 @@ import {OpenBowling} from "../../domain/open-bowling.domain";
 import {VolleyballLeague} from "../../domain/volleyball-league.domain";
 import {NewsService} from "../../services/news/news.service";
 import {News} from "../../domain/news.domain";
+import {AdminService} from '../../services/admin/admin.service';
+import {RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'admin-component',
@@ -28,18 +31,12 @@ export class AdminComponent {
 
   constructor(public dialog: MdDialog, private bowlingLeaguesService : BowlingLeaguesService,
               private openBowlingService : OpenBowlingService, private volleyballLeaguesService : VolleyballLeaguesService,
-              private newsService : NewsService) {}
+              private newsService : NewsService, private userService : AdminService) {}
 
   selectAdminPage(page : string) {
     this.selectedPage = page;
     if (page === 'Bowling Leagues') {
-      this.loadingBowlingLeagueData = true;
-      this.bowlingLeaguesService.getLeagues()
-        .retry(2)
-        .finally(() => this.loadingBowlingLeagueData = false)
-        .subscribe(bowlingLeagues =>{
-          this.bowlingLeagues = bowlingLeagues;
-        });
+      this.refreshBowlingLeagues();
     }
     else if (page === 'Open Bowling') {
       this.loadingOpenBowlingData = true;
@@ -68,6 +65,16 @@ export class AdminComponent {
     }
   }
 
+  private refreshBowlingLeagues() {
+    this.loadingBowlingLeagueData = true;
+    this.bowlingLeaguesService.getLeagues()
+        .retry(2)
+        .finally(() => this.loadingBowlingLeagueData = false)
+        .subscribe(bowlingLeagues => {
+          this.bowlingLeagues = bowlingLeagues;
+        });
+  }
+
   saveBowlingLeagues() {
     this.bowlingLeaguesService.saveLeagues(this.bowlingLeagues);
   }
@@ -78,6 +85,15 @@ export class AdminComponent {
 
   saveLeagues() {
     this.volleyballLeaguesService.saveLeagues(this.volleyballLeagues);
+  }
+
+  fileChange(event, league : BowlingLeague) {
+    let filename = event[0].name;
+    league.url = 'uploads/' + filename;
+    let response = this.bowlingLeaguesService.uploadFile(event);
+    console.log(response);
+    this.saveBowlingLeagues();
+    this.refreshBowlingLeagues();
   }
 
 }

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="userService.admin">
   <md-toolbar>
     <div *ngFor="let page of adminPages">
       <button md-button md-ripple (click)="selectAdminPage(page)" type="button" >
@@ -20,6 +20,10 @@
       <md-input-container>
         <input mdInput placeholder="Url" [(ngModel)]="bowlingLeague.url" required>
       </md-input-container>
+      <input-file (onFileSelect)="fileChange($event, bowlingLeague)" [accept]="'*/*'">
+        <span class="nofiles">Choose file</span>
+        <span class="selected">Files selected</span>
+      </input-file>
     </div>
     <button md-raised-button md-ripple (click)="saveBowlingLeagues()">Save</button>
   </div>

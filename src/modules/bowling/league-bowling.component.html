@@ -17,6 +17,7 @@
     <img md-card-image src="../../assets/strike.jpg" style="height: 400px">
   </md-card>
   <md-card *ngIf="selectedLeague != null">
-    <img md-card-image [src]="selectedLeague.url">
+    <!--{{selectedLeague.url}}-->
+    <img md-card-image [src]="selectedLeague.url" >
   </md-card>
 </div>

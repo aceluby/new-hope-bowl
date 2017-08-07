@@ -91,7 +91,7 @@ export class SchedulesComponent {
         .filter(game => game.teamOne.name === team.name || game.teamTwo.name === team.name)
         .map(game => {
           return game;
-        })
+        });
   }
 
   calculateResult(game : VolleyballGame, team : VolleyballTeam) : string {
@@ -131,13 +131,14 @@ export class SchedulesComponent {
     }
   }
 
-  convertBooleanToNumber(bool : boolean) : number {
+  private convertBooleanToNumber(bool : boolean) : number {
     if (bool == true) {
       return 1;
     } else {
       return 0;
     }
   }
+
 }
 
 
