@@ -31,7 +31,7 @@ function sendMail(emailRequest : CustomEmail) {
     "port": null,
     "path": "/v3/mail/send",
     "headers": {
-      "authorization": "Bearer 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",
+      "authorization": "Bearer <<api-key>>",
       "content-type": "application/json"
     }
   };
